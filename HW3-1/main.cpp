@@ -45,7 +45,7 @@ class Time_check
 
 int main()
 {
-    const auto N = 100;
+    const auto N = 1000000;
     
     std::set<int> s;
     std::vector<int> v;
