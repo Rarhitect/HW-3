@@ -239,6 +239,7 @@
 		2D0B541225E788D100E495CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -247,6 +248,7 @@
 		2D0B541325E788D100E495CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
