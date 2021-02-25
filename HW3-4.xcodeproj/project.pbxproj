@@ -239,7 +239,10 @@
 		2D0B543E25E7C9A300E495CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/boost_1_75_0/include/;
+				LIBRARY_SEARCH_PATHS = /usr/local/boost_1_75_0/lib/;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,7 +250,10 @@
 		2D0B543F25E7C9A300E495CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/boost_1_75_0/include/;
+				LIBRARY_SEARCH_PATHS = /usr/local/boost_1_75_0/lib/;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
