@@ -6,7 +6,7 @@
 
 #include <boost/functional/hash.hpp>
 
-std::set < std::string > make_random_words(std::size_t N, std::size_t length = 6)
+std::set < std::string > make_random_words(std::size_t N, std::size_t length = 10)
 {
     std::uniform_int_distribution <> letter(97, 122);
     std::default_random_engine e(static_cast < std::size_t > (
@@ -28,10 +28,10 @@ unsigned int ELFHash(const char* str, unsigned int length);
 unsigned int BKDRHash(const char* str, unsigned int length);
 unsigned int SDBMHash(const char* str, unsigned int length);
 unsigned int DJBHash(const char* str, unsigned int length);
-//unsigned int DEKHash(const char* str, unsigned int length); - код с сайта не работает
+unsigned int DEKHash(const char* str, unsigned int length);
 unsigned int APHash(const char* str, unsigned int length);
 
-constexpr unsigned int N = 10000;
+constexpr unsigned int N = 1000000;
 
 void RS_collision_test(std::set<std::string> words);
 void JS_collision_test(std::set<std::string> words);
@@ -41,6 +41,7 @@ void SDBM_collision_test(std::set<std::string> words);
 void DJB_collision_test(std::set<std::string> words);
 void AP_collision_test(std::set<std::string> words);
 void ELF_collision_test(std::set<std::string> words);
+void DEK_collision_test(std::set<std::string> words);
 
 int main()
 {
@@ -54,6 +55,7 @@ int main()
     DJB_collision_test(words);
     AP_collision_test(words);
     ELF_collision_test(words);
+    DEK_collision_test(words);
     
     return 0;
 }
@@ -74,7 +76,7 @@ void RS_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "RS method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "RS method; " << collision_counter << " collisions" << std::endl;
 }
 
 void JS_collision_test(std::set<std::string> words)
@@ -93,7 +95,7 @@ void JS_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "JS method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "JS method; " << collision_counter << " collisions" << std::endl;
 }
 
 void PJW_collision_test(std::set<std::string> words)
@@ -112,7 +114,7 @@ void PJW_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "PJW method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "PJW method; " << collision_counter << " collisions" << std::endl;
 }
 
 void ELF_collision_test(std::set<std::string> words)
@@ -131,7 +133,7 @@ void ELF_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "ELF method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "ELF method; " << collision_counter << " collisions" << std::endl;
 }
 
 void BKDR_collision_test(std::set<std::string> words)
@@ -150,7 +152,7 @@ void BKDR_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "BKDR method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "BKDR method; " << collision_counter << " collisions" << std::endl;
 }
 
 void SDBM_collision_test(std::set<std::string> words)
@@ -169,7 +171,7 @@ void SDBM_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "SDBM method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "SDBM method; " << collision_counter << " collisions" << std::endl;
 }
 
 void DJB_collision_test(std::set<std::string> words)
@@ -188,7 +190,7 @@ void DJB_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "DJB method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "DJB method; " << collision_counter << " collisions" << std::endl;
 }
 
 void AP_collision_test(std::set<std::string> words)
@@ -207,7 +209,26 @@ void AP_collision_test(std::set<std::string> words)
         }
     }
 
-    std::cout << "AP method; Size = " << N << "; " << collision_counter << " collisions" << std::endl;
+    std::cout << "AP method; " << collision_counter << " collisions" << std::endl;
+}
+
+void DEK_collision_test(std::set<std::string> words)
+{
+    unsigned int collision_counter = 0;
+    std::set < std::size_t > word_hashes;
+    for (auto &i: words)
+    {
+        if ( word_hashes.count( DEKHash(i.c_str(), 6) ) == 0 )
+        {
+            word_hashes.insert( DEKHash(i.c_str(), 6) );
+        }
+        else
+        {
+            ++collision_counter;
+        }
+    }
+
+    std::cout << "DEK method; " << collision_counter << " collisions" << std::endl;
 }
 
 unsigned int RSHash(const char* str, unsigned int length = 6)
@@ -324,18 +345,18 @@ unsigned int DJBHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-//unsigned int DEKHash(const char* str, unsigned int length = 6)
-//{
-//   unsigned int hash = len;
-//   unsigned int i    = 0;
-//
-//   for (i = 0; i < length; ++str, ++i)
-//   {
-//      hash = ((hash << 5) ^ (hash >> 27)) ^ (*str);
-//   }
-//
-//   return hash;
-//}
+unsigned int DEKHash(const char* str, unsigned int length = 6)
+{
+   unsigned int hash = length;
+   unsigned int i    = 0;
+
+   for (i = 0; i < length; ++str, ++i)
+   {
+      hash = ((hash << 5) ^ (hash >> 27)) ^ (*str);
+   }
+
+   return hash;
+}
 
 unsigned int APHash(const char* str, unsigned int length = 6)
 {
