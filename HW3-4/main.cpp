@@ -66,9 +66,9 @@ void RS_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( RSHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( RSHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( RSHash(i.c_str(), 6) );
+            word_hashes.insert( RSHash(i.c_str(), 10) );
         }
         else
         {
@@ -85,9 +85,9 @@ void JS_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( JSHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( JSHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( JSHash(i.c_str(), 6) );
+            word_hashes.insert( JSHash(i.c_str(), 10) );
         }
         else
         {
@@ -104,9 +104,9 @@ void PJW_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( PJWHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( PJWHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( PJWHash(i.c_str(), 6) );
+            word_hashes.insert( PJWHash(i.c_str(), 10) );
         }
         else
         {
@@ -123,9 +123,9 @@ void ELF_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( ELFHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( ELFHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( ELFHash(i.c_str(), 6) );
+            word_hashes.insert( ELFHash(i.c_str(), 10) );
         }
         else
         {
@@ -142,9 +142,9 @@ void BKDR_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( BKDRHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( BKDRHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( BKDRHash(i.c_str(), 6) );
+            word_hashes.insert( BKDRHash(i.c_str(), 10) );
         }
         else
         {
@@ -161,9 +161,9 @@ void SDBM_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( SDBMHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( SDBMHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( SDBMHash(i.c_str(), 6) );
+            word_hashes.insert( SDBMHash(i.c_str(), 10) );
         }
         else
         {
@@ -180,9 +180,9 @@ void DJB_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( DJBHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( DJBHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( DJBHash(i.c_str(), 6) );
+            word_hashes.insert( DJBHash(i.c_str(), 10) );
         }
         else
         {
@@ -199,9 +199,9 @@ void AP_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( APHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( APHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( APHash(i.c_str(), 6) );
+            word_hashes.insert( APHash(i.c_str(), 10) );
         }
         else
         {
@@ -218,9 +218,9 @@ void DEK_collision_test(std::set<std::string> words)
     std::set < std::size_t > word_hashes;
     for (auto &i: words)
     {
-        if ( word_hashes.count( DEKHash(i.c_str(), 6) ) == 0 )
+        if ( word_hashes.count( DEKHash(i.c_str(), 10) ) == 0 )
         {
-            word_hashes.insert( DEKHash(i.c_str(), 6) );
+            word_hashes.insert( DEKHash(i.c_str(), 10) );
         }
         else
         {
@@ -231,7 +231,7 @@ void DEK_collision_test(std::set<std::string> words)
     std::cout << "DEK method; " << collision_counter << " collisions" << std::endl;
 }
 
-unsigned int RSHash(const char* str, unsigned int length = 6)
+unsigned int RSHash(const char* str, unsigned int length = 10)
 {
    unsigned int b    = 378551;
    unsigned int a    = 63689;
@@ -247,7 +247,7 @@ unsigned int RSHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int JSHash(const char* str, unsigned int length = 6)
+unsigned int JSHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = 1315423911;
    unsigned int i    = 0;
@@ -260,7 +260,7 @@ unsigned int JSHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int PJWHash(const char* str, unsigned int length = 6)
+unsigned int PJWHash(const char* str, unsigned int length = 10)
 {
    const unsigned int BitsInUnsignedInt = (unsigned int)(sizeof(unsigned int) * 8);
    const unsigned int ThreeQuarters     = (unsigned int)((BitsInUnsignedInt  * 3) / 4);
@@ -284,7 +284,7 @@ unsigned int PJWHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int ELFHash(const char* str, unsigned int length = 6)
+unsigned int ELFHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = 0;
    unsigned int x    = 0;
@@ -305,7 +305,7 @@ unsigned int ELFHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int BKDRHash(const char* str, unsigned int length = 6)
+unsigned int BKDRHash(const char* str, unsigned int length = 10)
 {
    unsigned int seed = 131; /* 31 131 1313 13131 131313 etc.. */
    unsigned int hash = 0;
@@ -319,7 +319,7 @@ unsigned int BKDRHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int SDBMHash(const char* str, unsigned int length = 6)
+unsigned int SDBMHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = 0;
    unsigned int i    = 0;
@@ -332,7 +332,7 @@ unsigned int SDBMHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int DJBHash(const char* str, unsigned int length = 6)
+unsigned int DJBHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = 5381;
    unsigned int i    = 0;
@@ -345,7 +345,7 @@ unsigned int DJBHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int DEKHash(const char* str, unsigned int length = 6)
+unsigned int DEKHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = length;
    unsigned int i    = 0;
@@ -358,7 +358,7 @@ unsigned int DEKHash(const char* str, unsigned int length = 6)
    return hash;
 }
 
-unsigned int APHash(const char* str, unsigned int length = 6)
+unsigned int APHash(const char* str, unsigned int length = 10)
 {
    unsigned int hash = 0xAAAAAAAA;
    unsigned int i    = 0;
