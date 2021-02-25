@@ -21,45 +21,48 @@ std::set < std::string > make_random_words(std::size_t N, std::size_t length = 1
     return words;
 }
 
-constexpr std::size_t size = 10000000;
+std::size_t size = 1000;
 
 int main()
 {
-    unsigned int collision_counter = 0;
-    std::set < std::string > words = make_random_words(size);
-    
-    std::set < int > numerics;
-    for (auto i = 0; i < size; ++i)
+    for (auto i = 0; i < 20; ++i)
     {
-        numerics.insert(rand());
-    }
+        unsigned int collision_counter = 0;
+        std::set < std::string > words = make_random_words(size);
     
-    std::set < std::size_t > word_hashes;
-    std::set < std::size_t > numeric_hashes;
-    for (auto i: words)
-    {
-        if (word_hashes.count(boost::hash_value(i)) == 0)
+        std::set < int > numerics;
+        for (auto i = 0; i < size; ++i)
         {
-            word_hashes.insert(boost::hash_value(i));
+            numerics.insert(rand());
         }
-        else
-        {
-            ++collision_counter;
-        }
-    }
-    for (auto i: numerics)
-    {
-        if (numeric_hashes.count(boost::hash_value(i)) == 0)
-        {
-            numeric_hashes.insert(boost::hash_value(i));
-        }
-        else
-        {
-            ++collision_counter;
-        }
-    }
     
-    std::cout << "We got " << collision_counter << " collisions" << std::endl;
+        std::set < std::size_t > word_hashes;
+        std::set < std::size_t > numeric_hashes;
+        for (auto i: words)
+        {
+            if (word_hashes.count(boost::hash_value(i)) == 0)
+            {
+                word_hashes.insert(boost::hash_value(i));
+            }
+            else
+            {
+                ++collision_counter;
+            }
+        }
+        for (auto i: numerics)
+        {
+            if (numeric_hashes.count(boost::hash_value(i)) == 0)
+            {
+                numeric_hashes.insert(boost::hash_value(i));
+            }
+            else
+            {
+                ++collision_counter;
+            }
+        }
     
+        std::cout << "Size = " << size << "; " << collision_counter << " collisions" << std::endl;
+        size += 50000;
+    }
     return 0;
 }
