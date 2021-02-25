@@ -2,6 +2,7 @@
 #include <string>
 #include <random>
 #include <set>
+#include <chrono>
 
 #include <boost/functional/hash.hpp>
 
