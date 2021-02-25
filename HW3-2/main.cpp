@@ -2,11 +2,11 @@
 
 std::size_t hash(double d)
 {
-    return (unsigned&) d;
+    return (unsigned&) d % 500;
 }
 
 int main()
 {
-    std::cout << hash(12.046) << std::endl;
+    std::cout << hash(178.041) << std::endl;
     return 0;
 }
