@@ -1,32 +1,27 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <random>
 
 std::size_t hash(double d)
 {
-    return (unsigned&) d;
+    return (unsigned&) d % 1001;
 }
 
-float random_nums()
-{
-    auto a = static_cast<double>(rand());
-    auto b = static_cast<double>(rand());
-    auto c = static_cast<double>(rand());
-    return a * b / c;
-}
-
-constexpr std::size_t N = 100000;
+constexpr std::size_t N = 1000;
 
 int main()
 {
-    std::vector<double> test_vec;
+    std::random_device rd;
+    std::mt19937 mersenne(rd());
+    std::vector<double> test_vec1;
     for (auto i = 0; i < N; ++i)
     {
-        test_vec.push_back(random_nums());
+        test_vec1.push_back(static_cast<double>(mersenne()));
     }
-    std::sort(test_vec.begin(), test_vec.end());
+    std::sort(test_vec1.begin(), test_vec1.end());
     auto summ = 0;
-    for (auto &i: test_vec)
+    for (auto &i: test_vec1)
     {
         auto begin = std::chrono::system_clock::now();
         hash(i);
@@ -36,5 +31,22 @@ int main()
     }
     std::cout << "Average time of hashing is " << static_cast<double>(summ)/static_cast<double>(N) << " ns" << std::endl;
     std::cout << "It is kind of quick result i think" << std::endl;
+
+    std::vector<double> test_vec2;
+    for (auto i = 0; i < N; ++i)
+    {
+        test_vec2.push_back(static_cast<double>(mersenne()));
+    }
+    std::sort(test_vec2.begin(), test_vec2.end());
+
+    std::cout << "Testing the uniformity....." << std::endl;
+    auto number = 1;
+    for(auto &i: test_vec2)
+    {
+        std::cout << number << ";" << hash(i) << std::endl;
+        ++number;
+    }
+
     return 0;
 }
+
